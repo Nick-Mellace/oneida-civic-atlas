@@ -1,0 +1,20 @@
+{
+  "blotters": {
+    "count": 71,
+    "earliest_publication_utc": "2024-05-31T02:32:48+00:00",
+    "latest_publication_utc": "2026-09-04T17:55:55+00:00",
+    "sha256": "5ab78303590208518b8f79e85136610ed748d9c3f4775dbcdee48ee11838ed05"
+  },
+  "blog_localNews": {
+    "count": 15,
+    "earliest_publication_utc": "2024-05-30T20:29:58+00:00",
+    "latest_publication_utc": "2026-08-07T23:53:23+00:00",
+    "sha256": "069302561fd8fc8674ef7eaa9ae06082120ead531e6c0dd7e2a1b896e72b305d"
+  },
+  "blog_warrantsList": {
+    "count": 92,
+    "earliest_publication_utc": "2024-05-15T16:20:13+00:00",
+    "latest_publication_utc": "2026-09-02T01:59:58+00:00",
+    "sha256": "5b7b508da7657b1a1496f8fdb07df175e1d403add5ed7e27f38cf951791b272c"
+  }
+}

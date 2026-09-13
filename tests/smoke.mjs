@@ -28,6 +28,8 @@ test('HTML references expected local assets and Leaflet', async () => {
   assert.match(html, /\.\/css\/styles\.css/);
   assert.match(html, /\.\/js\/app\.js/);
   assert.match(html, /leaflet@1\.9\.4/);
-  assert.match(html, /id="map"/);
-  assert.match(html, /id="project-list"/);
+  assert.match(html, /id="view"/);
+  const app = await fs.readFile(new URL('../js/app.js', import.meta.url), 'utf8');
+  assert.match(app, /id="map"/);
+  assert.match(app, /id="project-list"/);
 });

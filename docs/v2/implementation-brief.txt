@@ -1,0 +1,274 @@
+ONEIDA CIVIC ATLAS: VERSION 2 PRODUCT REDESIGN + CIVIC INFORMATION EXPANSION
+Redesign and substantially upgrade the existing Oneida Civic Atlas, a public-facing civic information platform focused on the City of Oneida, New York.
+This is not simply a visual refresh. Treat this as the transition from an early data-dashboard MVP into a modern, resident-centered civic product that feels distinctive, useful, trustworthy, polished, and locally rooted.
+The current prototype feels too much like a conventional AI-generated dashboard: rectangular cards, predictable sidebar/filter layouts, dense information presentation, and desktop-first behavior. Avoid that aesthetic.
+DESIGN DIRECTION
+Create a visual system that feels unconventional for municipal software without becoming confusing or experimental for its own sake.
+The product must be immediately usable by:
+- teenagers and young adults
+- working-age residents
+- older residents with limited technical familiarity
+- journalists and researchers
+- municipal staff
+- residents using phones as their primary device
+The desired character is:
+local newspaper + neighborhood wayfinding system + modern transit app + civic field guide
+rather than:
+enterprise SaaS dashboard + government portal + generic ChatGPT-generated UI
+Use editorial hierarchy, typography, spatial composition, maps, timelines, contextual panels, subtle motion, and strong information architecture rather than filling every surface with cards.
+Favor:
+- large, confident typography
+- editorial layouts
+- generous whitespace
+- map-led exploration
+- strong mobile navigation
+- information drawers and bottom sheets
+- subtle textures or geographic/cartographic motifs
+- recognizable iconography
+- clear source provenance
+- progressive disclosure
+Avoid:
+- excessive rounded cards
+- giant pill buttons everywhere
+- gradient-heavy AI/SaaS styling
+- excessive shadows
+- red-vs-blue political symbolism
+- patriotic clichés
+- tiny dashboard widgets
+- dense desktop sidebars transplanted onto mobile
+ONEIDA VISUAL IDENTITY
+Ground the design in real Oneida identity, but do not invent official municipal branding.
+Verified local references include:
+- The City uses an official municipal seal on formal documents.
+- The City currently uses the phrase “A Historic Community Moving Forward.”
+- Oneida's built and civic character includes Victorian-era architecture, City Hall, the Kallet Civic Center, Oneida Public Library, parks, the rail trail, the Mansion House, Mount Hope Reservoir, community festivals, and a compact historic downtown.
+- The Oneida City School District retains blue and orange because of their longstanding importance to community heritage. These colors may inspire the Atlas palette, but must not be presented as official City of Oneida municipal colors.
+Explore a palette derived from this context:
+- deep civic/navy blue
+- warm heritage orange/rust
+- cream or warm paper white
+- charcoal/slate
+- muted cartographic greens where useful
+Use these with restraint. The product should feel more like a contemporary civic publication than a school athletics site.
+Do not appropriate symbols, iconography, clan imagery, seals, logos, or cultural motifs belonging to the Oneida Nation. The City of Oneida and Oneida Nation are separate governmental entities.
+Consider subtle design motifs inspired by:
+- historic street maps
+- rail lines
+- street-grid geometry
+- public-document typography
+- architectural details
+- municipal survey maps
+rather than decorative Americana.
+MOBILE-FIRST REDESIGN
+Treat mobile as a primary interface, not a compressed desktop layout.
+The mobile home screen should immediately answer:
+“What is happening in Oneida?”
+Build the first screen around resident tasks such as:
+- Near Me
+- Projects
+- Meetings
+- Alerts
+- Public Safety
+- Who Do I Contact?
+- How Do I Participate?
+Consider a persistent bottom navigation for approximately 4–5 primary destinations, with secondary navigation accessed contextually.
+The map should use:
+- full-width/full-screen treatment when appropriate
+- draggable bottom sheets
+- thumb-friendly controls
+- large tap targets
+- list alternatives
+- easy transitions between map and detail views
+Avoid desktop-style horizontal filter bars or narrow side rails on phones.
+Meet WCAG 2.2 AA accessibility standards and do not communicate status using color alone.
+NEW AREA 1: CIVIC DIRECTORY / “WHO DO I CONTACT?”
+Build a resident-oriented civic directory rather than a bureaucratic organization chart.
+Include verified contacts for entities such as:
+- City Hall
+- Mayor / City Manager
+- Common Council
+- City Clerk
+- Public Works
+- Water Department
+- Planning & Development
+- Code Enforcement
+- Police
+- Fire
+- Parks & Recreation
+- Chamberlain / tax-related services
+- Madison County services
+- Oneida City School District
+- Oneida Public Library
+- utilities
+- relevant authorities/nonprofits where appropriate
+Organize the directory both by agency and by resident question:
+“Who do I call about a pothole?”
+“Who handles zoning?”
+“Where do I report a water problem?”
+“Who handles emergency housing?”
+“Who represents my ward?”
+Each entry may include:
+- organization
+- responsibility
+- address
+- phone
+- email
+- hours
+- website
+- emergency/non-emergency distinction
+- jurisdiction
+- source
+- last verified date
+Never fabricate contact information.
+NEW AREA 2: STAY INFORMED
+Create a first-class Stay Informed section aggregating the fragmented ways Oneida residents can currently receive civic information.
+Research and integrate, where appropriate:
+- City email notifications
+- City Latest News
+- City Alerts & Notices
+- Common Council agendas / packets / minutes / videos
+- City meeting calendar
+- monthly City newsletter
+- public hearings
+- legal/public notices
+- NY-Alert
+- Oneida Police Department smartphone app
+- Madison County notification systems
+- other verified official alert channels
+Explain what each service is best for rather than merely presenting links.
+Example:
+City Email Notifications
+Best for: meeting agendas, public hearings, City notices.
+NY-Alert
+Best for: emergencies, weather, road closures, AMBER alerts.
+The City already promotes email notification signup and maintains Latest News and City Meetings content, so the Atlas should act as a clear navigation layer over these existing public systems rather than pretending to replace them.
+NEW AREA 3: PUBLIC SAFETY & POLICE ACTIVITY
+Research the complete publicly accessible history of:
+- Oneida Police Department police blotters
+- official OPD press releases
+- public safety alerts
+- warrants where officially published
+- traffic / crash notices where available
+- related City Alerts & Notices
+Determine:
+1. earliest reliably accessible publication date
+2. source format consistency
+3. whether entries can be programmatically parsed
+4. which fields are consistently available
+5. whether locations are exact addresses, blocks, streets, or absent
+6. how publication date differs from event/arrest date
+Then design a normalized Public Safety Activity dataset.
+Potential fields:
+- event_date
+- event_time
+- publication_date
+- incident_type
+- agency
+- location_text
+- geometry
+- geometry_confidence
+- officially_named_arrestee
+- age, if officially published
+- alleged_offenses
+- neutral_summary
+- arrest/disposition information
+- source_type
+- source_url
+- last_verified
+The interface should allow filtering/searching by:
+- date range
+- offense category
+- street/location
+- incident type
+- source
+Map incidents only when source-backed location information supports it.
+PUBLIC-SAFETY ETHICS / LANGUAGE
+Do not equate arrest with guilt.
+Use language such as:
+“Police reported…”
+“X was arrested and charged with…”
+Display a visible notice that charges are allegations and defendants are presumed innocent unless proven guilty.
+Names of defendants/arrested persons may be retained when an official public source itself names them, but do not build searchable identity records for:
+- victims
+- witnesses
+- minors
+- complainants
+- incidental individuals
+- people named only in unsubstantiated reports
+Do not infer race, residence, guilt, motivation, relationships, or criminal history.
+Distinguish among:
+- arrest/blotter
+- investigation
+- warrant
+- police press release
+- emergency alert
+- traffic incident
+- public safety notice
+- later verified court disposition, if available
+HOME PAGE: “WHAT'S HAPPENING IN ONEIDA?”
+Replace a project-database-first homepage with a resident-question-first civic home screen.
+Consider modules such as:
+Latest in Oneida
+A chronological stream containing clearly labeled items such as:
+- project update
+- meeting
+- public hearing
+- city notice
+- road/water alert
+- police/public-safety activity
+- funding announcement
+- construction milestone
+Every item must display its source/type so the feed never visually blurs an arrest with a council meeting or infrastructure update.
+Other prominent areas:
+Near You
+Map-based civic activity.
+Upcoming
+Meetings, hearings, deadlines.
+City Projects
+Existing Civic Atlas project database.
+Stay Informed
+Official notification services.
+Find the Right Office
+Civic directory.
+PRESERVE THE EXISTING CIVIC ATLAS INTEGRITY MODEL
+Keep the existing project database and map-feature separation.
+A project is the civic subject.
+A map feature is only its geographic representation.
+One project can have zero, one, or many geographic features.
+Never invent geometry.
+Preserve separate:
+- research confidence
+- geographic confidence
+Preserve explicit language such as:
+- “Geometry pending”
+- “Parcel verified; polygon pending”
+- “Completion date not established”
+- “No later award located in reviewed records”
+Do not make the interface more certain than the evidence.
+PRODUCT PERSONALITY
+The Atlas should feel like something native to Oneida, not a template that could be relabeled for any American city.
+It should communicate:
+curiosity, place, usefulness, accountability, history, and forward motion
+without becoming adversarial toward City government.
+The visual metaphor should be closer to:
+opening a beautifully designed field guide to your own city
+than opening a municipal database.
+A resident unfamiliar with municipal government should be able to arrive and understand where to go within seconds.
+A researcher should still be able to drill all the way down to primary records.
+IMPLEMENTATION REQUIREMENT
+Before implementing, audit the current Oneida Civic Atlas codebase and existing Step 4 project/app data.
+Produce:
+1. revised information architecture
+2. mobile and desktop layout strategy
+3. proposed design system
+4. Oneida-informed palette and typography rationale
+5. civic-directory data schema
+6. Stay Informed source registry
+7. police/public-safety source audit
+8. public-safety normalized schema
+9. redesigned homepage
+10. redesigned mobile navigation
+11. implementation plan
+12. working Version 2 prototype
+Do not replace verified data with invented content to make mockups look complete. Use clearly identified placeholders only where the design requires future information.
+The final result should feel meaningfully more sophisticated than a default dashboard or generic AI-generated web app while remaining legible and welcoming to someone who rarely uses technology.

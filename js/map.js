@@ -22,13 +22,13 @@ export function createAtlasMap(elementId, onProjectSelect) {
       const geoLayer = L.geoJSON(feature, {
         pointToLayer: (_f, latlng) => L.circleMarker(latlng, {
           radius: 8,
-          color: '#0e625d',
+          color: '#142f40',
           weight: 2,
-          fillColor: '#167f78',
+          fillColor: '#a43e22',
           fillOpacity: .88
         })
       });
-      geoLayer.bindPopup(`<button class="map-popup-button" data-map-project="${pid}"><strong>${escapeBasic(title)}</strong><span>${escapeBasic(category)}</span></button>`);
+      geoLayer.bindPopup(`<button class="map-popup-button" data-map-project="${escapeBasic(pid)}"><strong>${escapeBasic(title)}</strong><span>${escapeBasic(category)}</span></button>`);
       geoLayer.on('popupopen', (event) => {
         const button = event.popup.getElement()?.querySelector('[data-map-project]');
         button?.addEventListener('click', () => onProjectSelect(pid), { once: true });
