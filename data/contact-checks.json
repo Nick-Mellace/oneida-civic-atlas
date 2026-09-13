@@ -1,0 +1,15 @@
+[
+  {"id":"hall","checked":"2026-09-13","scope":"City Hall address, main telephone and office hours confirmed on the City website.","source_url":"https://www.oneidacityny.gov/"},
+  {"id":"manager","checked":"2026-09-13","scope":"Telephone and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"mayor","checked":"2026-09-13","scope":"Telephone, extension and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"clerk","checked":"2026-09-13","scope":"Telephone, extension and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"codes","checked":"2026-09-13","scope":"Telephone, extension and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"planning","checked":"2026-09-13","scope":"Telephone and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"fire","checked":"2026-09-13","scope":"Administrative telephone, extension and email confirmed in the official staff directory. These are not emergency-reporting hours or a dispatch number.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"parks","checked":"2026-09-13","scope":"Telephone and email confirmed in the official staff directory.","source_url":"https://www.oneidacityny.gov/staff_directory/index.php"},
+  {"id":"works","checked":"2026-09-13","scope":"Telephone, extension, email, address and office hours confirmed on the department page.","source_url":"https://www.oneidacityny.gov/departments/public_works/index.php"},
+  {"id":"water","checked":"2026-09-13","scope":"Telephone, extension, email, address and office hours confirmed on the department page.","source_url":"https://www.oneidacityny.gov/departments/water/index.php"},
+  {"id":"police","checked":"2026-09-13","scope":"Non-emergency number and department address confirmed on the Police page. The administrative number is different; reporting-service availability is not inferred from office hours.","source_url":"https://www.oneidacityny.gov/departments/police/index.php"},
+  {"id":"library","checked":"2026-09-13","scope":"Telephone, email and 459 Main Street address confirmed on the City's library listing. Facility hours have not been normalized because the Saturday text contains an ambiguity.","source_url":"https://www.oneidacityny.gov/our_community/oneida_public_library.php"},
+  {"id":"tax","checked":"2026-09-13","scope":"Email and address confirmed. The office page gives conflicting telephone numbers (363-7599 in the contact block; 363-7399 in its staff table). No single telephone is selected. The page states the office closes noon–1pm for lunch.","source_url":"https://www.oneidacityny.gov/departments/comptroller/accounting_and_treasury.php"}
+]

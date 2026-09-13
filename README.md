@@ -1,49 +1,44 @@
-# Oneida Civic Atlas — Version 2 prototype
+# Oneida Civic Atlas — V3
 
-Independent resident-centered civic field guide for Oneida, New York. Static HTML/CSS/ES modules, Leaflet 1.9.4 and bundled JSON. No build step, accounts, analytics or live ingestion backend.
+An independent resident's field guide to the City of Oneida, New York. This package evolves the supplied V2; it does not alter the existing private repository, Cloudflare deployment or Access allowlist.
 
-## Preview
+## Run locally
+
+From this directory:
 
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8000. JSON loading requires HTTP; opening index.html as a file is unsupported. Leaflet and OpenStreetMap tiles require internet access. The project list remains available if the map library fails.
+Open [the local preview](http://127.0.0.1:8000). Opening `index.html` directly as a file does not support the JSON requests. No build step or production npm dependencies are required. Modern browsers with ES modules, top-level await, Intl time zones and AbortSignal.timeout are required. Leaflet 1.9.4 and OpenStreetMap tiles load only after requesting the map.
 
-## Included
+## What changed
 
-- Resident-question homepage and five-destination mobile navigation.
-- All 20 original projects and 22 independent geographic features preserved byte for byte. Only 3 source-backed points are mapped.
-- Search, filters, map/list view, optional location centering, accessible native project detail dialog with evidence gaps and separate confidence dimensions.
-- 17 civic-directory entries, 9 notification/participation channels, 2 verified upcoming-at-snapshot meeting entries.
-- 71-publication police blotter index and 9 reviewed safety records. These are explicitly a sample, not full historical coverage or live alerts.
-- Source registry, JSON Schemas, source audit, offline ingestion/audit prototype, integrity/unit tests and implementation plan.
+- Five primary destinations: Home, Projects, Public Money, Community and Participate. Contacts stay in the header; evidence, methodology, downloads and the police archive are secondary.
+- Compact editorial homepage, restrained paper/navy/rust styling, responsive layout rules, visible focus, practical source links, hash navigation, Back restoration and printable briefings.
+- All 20 original projects and 22 geographic records remain byte-identical. Missing project milestones, spending and location information stay explicit.
+- One shared dataset for ten cultural, volunteer, faith and civic records. Past seasons, unresolved details and cancellations are labeled; stale records leave upcoming views automatically.
+- Three reconciled General Fund adopted-budget summaries (2023–2025), a donut/table, historical line chart, nominal/real/share controls, CSV export and methodology. **A comparable decade and audited actuals are not yet verified.**
+- Thirteen scoped V3 contact checks supplement the preserved directory. Police administrative hours are distinguished from reporting availability.
+- Correction notes download locally; no inbox or automatic submission is implied.
 
 ## Verify
 
-Requires Node 20+ and Python 3.10+ (schema verification also requires jsonschema 4.26.0).
+Node 20+ is recommended for tests; Python 3 is used for local serving and the optional legacy data checks.
 
 ```sh
-node --test tests/*.test.mjs tests/smoke.mjs
-python3 -m pip install jsonschema==4.26.0
-python3 scripts/validate-data.py
-python3 -m unittest discover -s tests -p '*_test.py'
+npm ci --ignore-scripts
+npm test
+npm run test:dom
+npm run validate
 ```
 
-See docs/v2/verification.md for actual checks and limitations. See docs/v2/design-and-plan.md and docs/v2/public-safety-audit.md for design, source history, data gaps and future integration work.
+`jsdom` is test-only. DOM checks are not a substitute for an actual browser, screen reader or visual layout review. See [actual verification results](docs/v3-verification.md), including the browser-preview restriction encountered in this environment.
 
-## Private repository / preview workflow
+## Deploy to the existing private site
 
-Base commit: ca74ced972d65329e59e57b9b8f0e63e5c303ba9 in Nick-Mellace/oneida-civic-atlas. Changes were prepared on codex/atlas-v2. Nothing has been pushed or deployed.
+See [the handoff](docs/v3-handoff.md). The ZIP contains source, tests and deployment-ready static files. It intentionally supplies no new hosting or authentication configuration. Merge changes into a review branch of the existing private repository, preserving its deployment files and Access rules. Do not enable a public preview or alternative public hostname.
 
-Review the supplied patch in a clean checkout on a new branch. Run `git apply --check /path/to/atlas-v2.patch` before `git apply /path/to/atlas-v2.patch`. If the existing repository has changed, resolve conflicts rather than overwrite it. Alternatively copy the ZIP’s project contents into a review branch while preserving the existing .git directory and deployment configuration.
+## Maintain
 
-Keep the repository private. Reuse the existing Cloudflare Access-protected preview after reviewing changes; preserve its allowlist. Verify unauthenticated access is denied on every serving hostname before sharing a preview. Do not enable public GitHub Pages. A noindex tag is crawler guidance, not access control. No new hosting configuration is included because the repository did not contain the existing deployment configuration.
-
-## Data maintenance
-
-Do not edit the original project/geographic files to make a layout appear complete. Keep research/geographic confidence distinct; no inferred ward membership, geocoded hometowns or invented polygons. All new safety geometry is null.
-
-Run scripts/audit-police.py against a separately downloaded official JSON feed; outputs must be outside the served repository. Candidates remain pending until reviewed. Never copy raw police payloads or unreviewed candidates into served assets. Published safety rows require explicit reviewed status; preserve corrections and later official dispositions without implying guilt.
-
-This snapshot is dated September 12, 2026. Contacts, meetings and notices need maintenance. Historical notices must not be presented as current emergencies.
+See [source and data-gap notes](docs/v3-source-notes.md), [the implementation plan](docs/v3-plan.md), and the on-site About / methodology pages. V2's original documentation and source history remain under `docs/v2/`; their old implementation and verification claims describe V2, not this release. Old JS/CSS files remain for provenance but `index.html` loads only V3.

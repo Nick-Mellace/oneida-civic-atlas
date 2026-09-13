@@ -1,0 +1,13 @@
+{
+  "name": "oneida-civic-atlas-v3",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs tests/smoke.mjs",
+    "test:dom": "node --test tests/v3-dom.mjs",
+    "validate": "node scripts/validate-v3.mjs",
+    "serve": "python3 -m http.server 8000 --bind 127.0.0.1"
+  },
+  "devDependencies": {"jsdom": "26.1.0"}
+}

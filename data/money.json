@@ -1,0 +1,20 @@
+{
+  "entity": "City of Oneida, Madison County, New York",
+  "scope": "General Fund — adopted budget expenditure summary",
+  "basis": "As reported in the City's adopted-budget summary, headed Net Service Cost Financed by. Budget basis only; not audited GAAP expenditures or an all-funds total.",
+  "last_checked": "2026-09-13",
+  "base_year": 2024,
+  "cpi": {"2023": 304.7015833333333, "2024": 313.6888333333333},
+  "cpi_source": "https://www.bls.gov/regions/mid-atlantic/data/consumerpriceindexhistorical_us_table.htm",
+  "cpi_note": "Arithmetic mean of all 12 published monthly, not-seasonally-adjusted CPI-U all-items U.S. city average values, 1982–84=100. 2025 annual CPI not established for this release; its real-dollar value remains missing. CPI is a general purchasing-power adjustment, not a municipal construction-cost index.",
+  "categories": ["Employee benefits", "Public safety", "General government support", "Transportation", "Debt service", "Culture and recreation", "Home and community services", "Health"],
+  "years": [
+    {"year": 2023, "kind": "adopted", "total": 15783298, "values": [5096831,5411574,1718647,1540182,1081386,461618,393601,79459], "source_url": "https://www.oneidacityny.gov/Documents/Departments/Finance/City%20Budget/2023%20Adopted%20Budget.pdf?t=202512101240530", "source_title": "2023 Adopted Budget — expenditure summary", "page": "Printed page 12; PDF page 15"},
+    {"year": 2024, "kind": "adopted", "total": 16110749, "values": [5585803,5540067,1742044,1544283,779287,445743,399112,74410], "source_url": "https://www.oneidacityny.gov/Documents/Departments/Finance/City%20Budget/2024%20Adopted%20Budget.pdf?t=202512101240530", "source_title": "2024 Adopted Budget — expenditure summary", "page": "Printed page 12; PDF page 15"},
+    {"year": 2025, "kind": "adopted", "total": 17144013, "values": [6183423,5798272,1847789,1637610,786523,497357,333215,59824], "source_url": "https://www.oneidacityny.gov/Documents/Departments/Finance/City%20Budget/2025%20Adopted%20Budget.pdf?t=202512101240530", "source_title": "2025 Adopted Budget — expenditure summary", "page": "Printed page 12; PDF page 15"}
+  ],
+  "coverage_note": "Three adopted-budget years verified, 2023–2025. The 2017–2026 decade is not yet a comparable series. Earlier years, the 2026 summary, audited actual expenditures, all-funds reconciliation and a Comptroller category crosswalk remain outstanding. Missing years are not zero.",
+  "category_note": "The same eight summary categories are used across these three City documents. Employee benefits remain separate; they have not been assigned to departments. These summaries alone do not establish unchanged services, fund transfers or detailed accounting treatments.",
+  "official_budget_archive": "https://www.oneidacityny.gov/departments/comptroller/city_budget.php",
+  "osc_source": "https://www.osc.ny.gov/local-government/data"
+}
