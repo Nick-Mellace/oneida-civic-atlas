@@ -1,145 +1,30 @@
-import { loadAtlasData } from './data.js';
-import { filterProjects } from './filters.js';
-import { projectCardHTML, projectDetailHTML } from './render.js';
-import { createAtlasMap } from './map.js';
-
-const els = {
-  search: document.querySelector('#search-input'),
-  category: document.querySelector('#category-filter'),
-  status: document.querySelector('#status-filter'),
-  geometry: document.querySelector('#geometry-filter'),
-  clear: document.querySelector('#clear-filters'),
-  list: document.querySelector('#project-list'),
-  count: document.querySelector('#result-count'),
-  error: document.querySelector('#data-error'),
-  detailPanel: document.querySelector('#detail-panel'),
-  detailContent: document.querySelector('#detail-content'),
-  scrim: document.querySelector('#detail-scrim'),
-  fit: document.querySelector('#fit-map-button'),
-  methodology: document.querySelector('#methodology-dialog'),
-  methodologyButton: document.querySelector('#methodology-button'),
-  methodologyClose: document.querySelector('#close-methodology'),
-  tabs: [...document.querySelectorAll('.tab-button')],
-};
-
-const state = { query:'', category:'', status:'', geometry:'', selectedProjectId:null, activeView:'explore' };
-let atlas;
-let mapController;
-
-function options(values) {
-  return [...new Set(values.filter(Boolean))].sort((a,b) => a.localeCompare(b));
-}
-
-function populateFilters() {
-  for (const category of options(atlas.projects.map(p => p.category))) {
-    els.category.insertAdjacentHTML('beforeend', `<option value="${escapeAttr(category)}">${escapeText(category)}</option>`);
-  }
-  for (const status of options(atlas.projects.map(p => p.status))) {
-    els.status.insertAdjacentHTML('beforeend', `<option value="${escapeAttr(status)}">${escapeText(status)}</option>`);
-  }
-}
-
-function currentProjects() {
-  return filterProjects(atlas.projects, atlas.featuresByProject, state);
-}
-
-function render() {
-  const projects = currentProjects();
-  els.count.textContent = `${projects.length} of ${atlas.projects.length}`;
-  els.list.innerHTML = projects.map(p => projectCardHTML(p, atlas.featuresByProject.get(p.project_id) ?? [])).join('') || '<p class="fine-print">No projects match those filters.</p>';
-  bindCards();
-
-  const visibleIds = new Set(projects.map(p => p.project_id));
-  mapController.setFeatures(atlas.mapFeatures.filter(f => visibleIds.has(f.properties.project_id)));
-}
-
-function bindCards() {
-  for (const card of els.list.querySelectorAll('.project-card')) {
-    const open = () => openProject(card.dataset.projectId);
-    card.addEventListener('click', open);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-    });
-  }
-}
-
-function openProject(projectId) {
-  const project = atlas.projectById.get(projectId);
-  if (!project) return;
-  state.selectedProjectId = projectId;
-  const features = atlas.featuresByProject.get(projectId) ?? [];
-  els.detailContent.innerHTML = projectDetailHTML(project, features);
-  els.detailPanel.classList.add('open');
-  els.detailPanel.setAttribute('aria-hidden', 'false');
-  els.scrim.hidden = false;
-  document.body.style.overflow = 'hidden';
-  els.detailContent.querySelector('#close-detail')?.addEventListener('click', closeDetail);
-  mapController.focusProject(projectId);
-  requestAnimationFrame(() => els.detailContent.querySelector('#close-detail')?.focus());
-}
-
-function closeDetail() {
-  els.detailPanel.classList.remove('open');
-  els.detailPanel.setAttribute('aria-hidden', 'true');
-  els.scrim.hidden = true;
-  document.body.style.overflow = '';
-  state.selectedProjectId = null;
-}
-
-function bindControls() {
-  els.search.addEventListener('input', (e) => { state.query = e.target.value; render(); });
-  els.category.addEventListener('change', (e) => { state.category = e.target.value; render(); });
-  els.status.addEventListener('change', (e) => { state.status = e.target.value; render(); });
-  els.geometry.addEventListener('change', (e) => { state.geometry = e.target.value; render(); });
-  els.clear.addEventListener('click', () => {
-    Object.assign(state, {query:'',category:'',status:'',geometry:''});
-    els.search.value = ''; els.category.value = ''; els.status.value = ''; els.geometry.value = '';
-    render();
-  });
-  els.scrim.addEventListener('click', closeDetail);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (els.detailPanel.classList.contains('open')) closeDetail();
-      else if (els.methodology.open) els.methodology.close();
-    }
-  });
-  els.fit.addEventListener('click', () => mapController.fitVerified());
-  els.methodologyButton.addEventListener('click', () => els.methodology.showModal());
-  els.methodologyClose.addEventListener('click', () => els.methodology.close());
-
-  for (const tab of els.tabs) {
-    tab.addEventListener('click', () => setView(tab.dataset.view));
-  }
-}
-
-function setView(view) {
-  state.activeView = view;
-  document.body.classList.toggle('projects-only', view === 'projects');
-  for (const tab of els.tabs) {
-    const active = tab.dataset.view === view;
-    tab.classList.toggle('active', active);
-    tab.setAttribute('aria-pressed', String(active));
-  }
-  setTimeout(() => mapController.invalidate(), 0);
-}
-
-function showFatal(error) {
-  console.error(error);
-  els.error.hidden = false;
-  els.error.textContent = `The Atlas could not load its verified dataset: ${error.message}`;
-  els.count.textContent = 'Data unavailable';
-}
-
-function escapeText(v) { return String(v).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
-function escapeAttr(v) { return escapeText(v).replaceAll('"', '&quot;'); }
-
-try {
-  atlas = await loadAtlasData();
-  mapController = createAtlasMap('map', openProject);
-  populateFilters();
-  bindControls();
-  render();
-  mapController.fitVerified();
-} catch (error) {
-  showFatal(error);
-}
+import {loadAtlasData} from './data.js';
+import {filterProjects} from './filters.js';
+import {projectCardHTML,projectDetailHTML,escapeHTML as e} from './render.js';
+import {createAtlasMap} from './map.js';
+import {loadCivicData,filterDirectory,filterSafety,displayDate} from './civic.js';
+import {intro,source,select,unique,homeHTML,directoryRows,safetyRows,informedHTML,meetingHTML,aboutHTML} from './views.js';
+const view=document.querySelector('#view'),dialog=document.querySelector('#detail-panel');
+let atlas,civic,mapController,lastFocus;let exploreMode='list';
+const projectState={query:'',category:'',status:'',geometry:''};
+const $=s=>document.querySelector(s);
+function openProject(id){const p=atlas?.projectById.get(id);if(!p)return;lastFocus=document.activeElement;$('#detail-content').innerHTML=projectDetailHTML(p,atlas.featuresByProject.get(id)||[]);dialog.showModal();document.body.style.overflow='hidden';$('#close-detail').onclick=()=>dialog.close();$('#close-detail').focus()}
+dialog.addEventListener('close',()=>{document.body.style.overflow='';if(lastFocus?.isConnected)lastFocus.focus()});
+dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}});
+view.addEventListener('click',event=>{const card=event.target.closest('[data-project],[data-project-id]');if(card)openProject(card.dataset.project||card.dataset.projectId)});
+view.addEventListener('keydown',event=>{if((event.key==='Enter'||event.key===' ')&&event.target.matches('[data-project-id]')){event.preventDefault();openProject(event.target.dataset.projectId)}});
+function renderProjects(){const rows=filterProjects(atlas.projects,atlas.featuresByProject,projectState);$('#project-list').innerHTML=rows.map(p=>projectCardHTML(p,atlas.featuresByProject.get(p.project_id)||[])).join('')||'<p class="empty">No projects match. Clear filters to see all projects.</p>';$('#result-count').textContent=`${rows.length} of ${atlas.projects.length} projects`;const ids=new Set(rows.map(p=>p.project_id));mapController?.setFeatures(atlas.mapFeatures.filter(f=>ids.has(f.properties.project_id)))}
+function explore(){mapController?.raw.remove();mapController=null;view.innerHTML=intro('Explore / Projects','Follow what’s changing.','Search every project, including the work that cannot yet be placed on a map.')+`<div class="toolbar"><button id="list-mode" aria-pressed="${exploreMode==='list'}">Project list</button><button id="map-mode" aria-pressed="${exploreMode==='map'}">Map + list</button><button id="near-me">Near me</button><button id="clear-filters">Clear filters</button></div><p id="location-status" role="status" class="fine-print">Location is used only on request and is not stored. Map coverage is incomplete.</p><div class="filters"><label>Search projects<input id="search-input" type="search" placeholder="Water, downtown, sidewalks…" value="${e(projectState.query)}"></label>${select('category-filter','Category',unique(atlas.projects,'category'))}${select('status-filter','Status',unique(atlas.projects,'status'))}<label>Map state<select id="geometry-filter"><option value="">All projects</option><option value="mapped">Verified on map</option><option value="pending">Pending / non-spatial</option></select></label></div><p id="result-count" class="count" role="status"></p><div class="${exploreMode==='map'?'explore-grid':'list-mode'}"><section class="map-region" ${exploreMode==='map'?'':'hidden'}><div id="map" aria-label="Map of verified project sites"></div><p id="map-error" class="notice" hidden></p><p class="map-note">Only the original 3 verified sites are mapped. Null geometry stays null; a pin does not establish a parcel boundary.</p></section><section id="project-list" class="project-list" aria-label="Project results"></section></div>`;
+for(const key of ['category','status','geometry']){const el=$(`#${key}-filter`);el.value=projectState[key];el.onchange=()=>{projectState[key]=el.value;renderProjects()}}
+$('#search-input').oninput=event=>{projectState.query=event.target.value;renderProjects()};$('#clear-filters').onclick=()=>{Object.assign(projectState,{query:'',category:'',status:'',geometry:''});explore()};$('#list-mode').onclick=()=>{mapController?.raw.remove();mapController=null;exploreMode='list';explore()};$('#map-mode').onclick=()=>{mapController?.raw.remove();mapController=null;exploreMode='map';explore()};
+if(exploreMode==='map'){try{mapController=createAtlasMap('map',openProject)}catch(error){$('#map-error').hidden=false;$('#map-error').textContent='Map unavailable. The complete project list and evidence remain available.'}}
+renderProjects();
+$('#near-me').onclick=()=>{if(exploreMode!=='map'){exploreMode='map';explore()}const status=$('#location-status');if(!navigator.geolocation){status.textContent='Location is unavailable. Use the map or project search.';return}status.textContent='Waiting for location permission…';navigator.geolocation.getCurrentPosition(pos=>{if(!$('#location-status'))return;if(mapController){mapController.raw.setView([pos.coords.latitude,pos.coords.longitude],15);status.textContent='Map centered on your approximate location. No ward or project proximity is inferred.'}else status.textContent='Location received, but the map is unavailable. Use project search.'},()=>{status.textContent='Location unavailable or permission declined. Search by street or project instead.'},{timeout:10000,maximumAge:0})};}
+function directory(){view.innerHTML=intro('Civic directory','Who do I contact?','Start with your question. Find the responsible office and check the source before making a trip.')+`<p class="notice">For an emergency, call <a href="tel:911">911</a>. Office contacts below are for routine questions.</p><div class="toolbar"><button data-query="pothole">Pothole</button><button data-query="water">Water</button><button data-query="zoning">Zoning</button><button data-query="emergency housing">Housing help</button><button data-query="ward">My representative</button></div><div class="filters two"><label>Question or organization<input id="directory-query" type="search" placeholder="Try ‘pothole’ or ‘library’"></label>${select('jurisdiction','Jurisdiction',unique(civic.directory,'jurisdiction'))}</div><p id="directory-count" class="count" role="status"></p><div id="directory-results"></div>`;const render=()=>{const rows=filterDirectory(civic.directory,{query:$('#directory-query').value,jurisdiction:$('#jurisdiction').value});$('#directory-count').textContent=`${rows.length} contacts`;$('#directory-results').innerHTML=directoryRows(rows,civic)};$('#directory-query').oninput=render;$('#jurisdiction').onchange=render;view.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>{$('#directory-query').value=b.dataset.query;render()});render()}
+function safety(){view.innerHTML=intro('Public safety & police activity','Read the record.<br>Keep the context.','A reviewed sample of official reports, with a separate index of the available blotter publications.')+`<div class="notice"><strong>Charges are allegations. Defendants are presumed innocent unless proven guilty.</strong><p>9 reviewed entries · 71 indexed blotter publications. This is not a complete incident history, a crime-rate measure, or a live alert feed. Historical notices may no longer apply.</p></div><div class="toolbar"><button id="incidents-tab" aria-pressed="true">Reviewed entries</button><button id="archive-tab" aria-pressed="false">Publication archive</button><a href="./docs/v2/public-safety-audit.md">Source audit ↗</a></div><section id="incidents"><div class="filters safety"><label>Search activity<input id="safety-query" type="search" placeholder="Traffic, larceny, closure…"></label><label>Date basis<select id="date-basis"><option value="event_date">Event date</option><option value="publication_date">Publication date</option></select></label><label>From<input id="safety-from" type="date"></label><label>Through<input id="safety-to" type="date"></label>${select('safety-type','Incident type',unique(civic.safety,'incident_type'))}${select('safety-category','Category',unique(civic.safety,'offense_category'))}<label>Street / location<input id="safety-location" type="search" placeholder="Reported location only"></label>${select('safety-source','Source',unique(civic.safety,'source_id'))}</div><button id="safety-clear">Clear filters</button><p id="safety-count" class="count" role="status"></p><div id="safety-results"></div></section><section id="archive" hidden><p>All 71 publications returned by the currently linked official blotter feed. Publication timestamps span May 2024–September 2026. Titles describe reported coverage; they do not prove gap-free incident coverage.</p><label>Search publication titles<input id="archive-query" type="search" placeholder="2024, August…"></label><p id="archive-count" class="count" role="status"></p><div id="archive-results"></div></section>`;
+const render=()=>{const state={query:$('#safety-query').value,dateField:$('#date-basis').value,from:$('#safety-from').value,to:$('#safety-to').value,type:$('#safety-type').value,category:$('#safety-category').value,location:$('#safety-location').value,source:$('#safety-source').value};if(state.from&&state.to&&state.from>state.to){$('#safety-count').textContent='Choose an end date on or after the start date.';$('#safety-results').innerHTML='';return}const rows=filterSafety(civic.safety,state).sort((a,b)=>(b[state.dateField]||'').localeCompare(a[state.dateField]||''));$('#safety-count').textContent=`${rows.length} reviewed entries. Unknown event dates are excluded when an event-date range is selected.`;$('#safety-results').innerHTML=safetyRows(rows,civic)};
+view.querySelectorAll('#incidents input,#incidents select').forEach(el=>el.addEventListener('input',render));$('#safety-clear').onclick=()=>{view.querySelectorAll('#incidents input,#incidents select').forEach(el=>el.value=el.id==='date-basis'?'event_date':'');render()};
+for(const which of ['incidents','archive'])$(`#${which}-tab`).onclick=()=>{for(const name of ['incidents','archive']){$(`#${name}`).hidden=name!==which;$(`#${name}-tab`).setAttribute('aria-pressed',String(name===which))}};
+const archive=()=>{const q=$('#archive-query').value.toLowerCase();const rows=civic['safety-archive'].filter(r=>r.title.toLowerCase().includes(q));$('#archive-count').textContent=`${rows.length} publications`;$('#archive-results').innerHTML=rows.map(r=>`<article class="archive-row"><span>${displayDate(r.publication_date)}</span><div><strong>${e(r.title)}</strong><p>${source(civic,r.source_id,'Find this publication on the official archive ↗')}</p><small>Index only · ${e(r.id)}</small></div></article>`).join('')||'<p>No matching publication titles.</p>'};$('#archive-query').oninput=archive;archive();render()}
+function route(){mapController?.raw.remove();mapController=null;const name=location.hash.slice(1)||'home';document.querySelectorAll('.primary a').forEach(a=>{const active=a.hash==='#'+name||(name==='meetings'&&a.hash==='#informed');active?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});if(name==='explore')explore();else if(name==='directory')directory();else if(name==='safety')safety();else if(name==='informed')view.innerHTML=informedHTML(civic);else if(name==='about')view.innerHTML=aboutHTML();else if(name==='meetings')view.innerHTML=intro('Meetings & participation','Make room<br>for your voice.','Read the agenda, check the location, and confirm participation arrangements with the relevant board.')+civic.meetings.map(m=>meetingHTML(m,civic)).join('')+`<div class="notice"><p>These entries are a September 12 snapshot, not a live calendar. Meeting locations were not established in the indexed rows.</p>${source(civic,'meetings','Check all meeting records ↗')} · ${source(civic,'legal','Public hearings ↗')}</div>`;else view.innerHTML=homeHTML(atlas,civic);document.title=`${name.charAt(0).toUpperCase()+name.slice(1)} · Oneida Civic Atlas`;window.scrollTo(0,0)}
+try{[atlas,civic]=await Promise.all([loadAtlasData(),loadCivicData()]);route();window.addEventListener('hashchange',()=>{if(location.hash!=='#main')route();$('#main').focus()})}catch(error){view.innerHTML=`<div class="error"><h1>Records unavailable</h1><p>The local dataset could not load. Serve the project over HTTP and try again.</p><p>${e(error.message)}</p><a href="https://www.oneidacityny.gov/">Visit the official City website ↗</a></div>`}

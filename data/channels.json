@@ -1,0 +1,92 @@
+[
+  {
+    "id": "city",
+    "title": "City email notifications",
+    "best_for": "City email updates; select available subscriptions on the City website.",
+    "delivery": "Email signup on official site",
+    "group": "Updates",
+    "action": "Open city signup",
+    "source_id": "city",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "newsletter",
+    "title": "Monthly city newsletter",
+    "best_for": "A periodic overview of city activity.",
+    "delivery": "Read online / PDF",
+    "group": "Updates",
+    "action": "Read newsletters",
+    "source_id": "newsletter",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "notices",
+    "title": "City alerts & notices",
+    "best_for": "Municipal bulletins and service notices. Check the source for current status.",
+    "delivery": "Official website",
+    "group": "Alerts",
+    "action": "Read city notices",
+    "source_id": "notices",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "ny-alert",
+    "title": "NY-Alert",
+    "best_for": "Emergency conditions, severe weather and significant road closures for your selected area.",
+    "delivery": "Phone, text, email or fax",
+    "group": "Alerts",
+    "action": "Choose your alerts",
+    "source_id": "ny-alert",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "county-alert",
+    "title": "Madison County notifications",
+    "best_for": "County guidance for enrolling in emergency notifications.",
+    "delivery": "NY-Alert enrollment guidance",
+    "group": "Alerts",
+    "action": "Visit county guidance",
+    "source_id": "county-alert",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "app",
+    "title": "Oneida Police app",
+    "best_for": "Police information and department updates on your phone.",
+    "delivery": "iOS / Android app",
+    "group": "Alerts",
+    "action": "Find the official app",
+    "source_id": "app",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "meetings",
+    "title": "Agendas, packets & meetings",
+    "best_for": "Follow Council and boards through agendas, packets, minutes and available videos.",
+    "delivery": "Official document archive",
+    "group": "Participate",
+    "action": "Find a meeting",
+    "source_id": "meetings",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "legal",
+    "title": "Public hearings & legal notices",
+    "best_for": "Formal notices, hearing information and deadlines.",
+    "delivery": "Official notice archive",
+    "group": "Participate",
+    "action": "Read legal notices",
+    "source_id": "legal",
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "opd-news",
+    "title": "Police news & public safety",
+    "best_for": "Department releases, safety notices and traffic information.",
+    "delivery": "Official publication feed",
+    "group": "Updates",
+    "action": "Read police news",
+    "source_id": "opd-news",
+    "last_verified": "2026-09-12"
+  }
+]

@@ -62,7 +62,7 @@ export function projectDetailHTML(project, features=[]) {
   const sourceMarkup = links.length ? links.map(({label,url}) => `<li><a href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(label)}</a></li>`).join('') : '<li>No source link is stored for this record.</li>';
   const addresses = [...new Set(features.map(f => f.properties?.address).filter(Boolean))];
   const geometry = getGeometryLabel(features);
-  const mappedFeatures = features.filter(f => f.geometry !== null).length;
+  const mappedFeatures = features.filter(f => Boolean(f.geometry)).length;
   const location = addresses.length ? addresses.map(escapeHTML).join('<br>') : textOrUnknown(project.verified_location, 'Location not established.');
 
   return `
@@ -89,6 +89,8 @@ export function projectDetailHTML(project, features=[]) {
         ${factRow('Jurisdiction', textOrUnknown(project.jurisdiction))}
         ${factRow('Lead entity', textOrUnknown(project.lead_entity))}
         ${factRow('Mapped features', escapeHTML(mappedFeatures))}
+        ${factRow('Geographic qualification', textOrUnknown(project.geography_detail))}
+        ${factRow('Geographic verification', textOrUnknown(project.geography_verification))}
       </dl>
     </section>
     <section class="detail-section">
@@ -124,6 +126,6 @@ export function projectDetailHTML(project, features=[]) {
     </section>
     <details class="sources-drawer">
       <summary>Sources & evidence (${links.length})</summary>
-      <ul>${sourceMarkup}</ul>
+      <p>${textOrUnknown(project.source_gap, 'No additional source gap recorded.')}</p><ul>${sourceMarkup}</ul>
     </details>`;
 }

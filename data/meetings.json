@@ -1,0 +1,22 @@
+[
+  {
+    "id": "council-20260915",
+    "title": "Common Council",
+    "start": "2026-09-15T18:30:00-04:00",
+    "source_id": "meetings",
+    "location": null,
+    "agenda_available": true,
+    "packet_available": true,
+    "last_verified": "2026-09-12"
+  },
+  {
+    "id": "recreation-20260916",
+    "title": "Recreation Commission",
+    "start": "2026-09-16T18:30:00-04:00",
+    "source_id": "meetings",
+    "location": null,
+    "agenda_available": false,
+    "packet_available": false,
+    "last_verified": "2026-09-12"
+  }
+]

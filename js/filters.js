@@ -15,7 +15,7 @@ function searchableText(project) {
 
 export function getGeometryLabel(features = []) {
   if (!features.length) return 'Map geometry pending';
-  const hasGeometry = features.some((f) => f.geometry !== null);
+  const hasGeometry = features.some((f) => Boolean(f.geometry));
   if (hasGeometry) return 'Verified on map';
   const isCitywide = features.some((f) => {
     const s = f.properties?.geometry_status ?? '';
@@ -37,7 +37,7 @@ export function filterProjects(projects, featuresByProject, state = {}) {
     if (status && project.status !== status) return false;
 
     const features = featuresByProject?.get(project.project_id) ?? [];
-    const hasMapped = features.some((f) => f.geometry !== null);
+    const hasMapped = features.some((f) => Boolean(f.geometry));
     if (geometry === 'mapped' && !hasMapped) return false;
     if (geometry === 'pending' && hasMapped) return false;
     return true;

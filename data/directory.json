@@ -1,0 +1,354 @@
+[
+  {
+    "id": "hall",
+    "organization": "City Hall",
+    "questions": [
+      "Where do I start?",
+      "general city questions"
+    ],
+    "responsibility": "General city information and routing.",
+    "jurisdiction": "City",
+    "phone": "315-363-4800",
+    "email": null,
+    "address": "109 N. Main Street, Oneida, NY 13421",
+    "hours": "Mon–Thu 8am–4pm; Fri 8am–3:30pm. Holiday exceptions apply.",
+    "website": "https://www.oneidacityny.gov/",
+    "source_ids": [
+      "city"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "manager",
+    "organization": "City Manager",
+    "questions": [
+      "How do I contact city administration?"
+    ],
+    "responsibility": "City administration.",
+    "jurisdiction": "City",
+    "phone": "315-363-4800",
+    "email": "klovell@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Staff directory number; some department pages show a different extension."
+  },
+  {
+    "id": "mayor",
+    "organization": "Mayor",
+    "questions": [
+      "How do I contact the mayor?"
+    ],
+    "responsibility": "Contact the Mayor’s office.",
+    "jurisdiction": "City",
+    "phone": "315-363-4800 ext. 129",
+    "email": "rrossi@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "council",
+    "organization": "Common Council",
+    "questions": [
+      "Who represents my ward?",
+      "How do I contact my councilor?"
+    ],
+    "responsibility": "Find ward representatives using the City’s directory and official ward map.",
+    "jurisdiction": "City",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/government/common_council/ward_map.php",
+    "source_ids": [
+      "wards"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Atlas does not infer your ward from an address; authoritative GIS boundaries are pending."
+  },
+  {
+    "id": "clerk",
+    "organization": "City Clerk",
+    "questions": [
+      "Where do I request records?",
+      "FOIL records licenses permits"
+    ],
+    "responsibility": "Public records, licenses and meeting documents.",
+    "jurisdiction": "City",
+    "phone": "315-363-7378 ext. 128",
+    "email": "slapera@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "works",
+    "organization": "Public Works",
+    "questions": [
+      "Who do I call about a pothole?",
+      "street repairs snow sewer tree"
+    ],
+    "responsibility": "City street repairs, drainage, sewers and city-owned trees.",
+    "jurisdiction": "City",
+    "phone": "315-363-7222 ext. 117",
+    "email": "jrowe@oneidacityny.gov",
+    "address": "109 N. Main Street, Oneida, NY 13421",
+    "hours": "Mon–Thu 8am–4pm; Fri 8am–3:30pm. Holiday exceptions apply.",
+    "website": "https://www.oneidacityny.gov/departments/public_works/index.php",
+    "source_ids": [
+      "works"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "water",
+    "organization": "Water Department",
+    "questions": [
+      "Where do I report a water problem?",
+      "water pressure water bill"
+    ],
+    "responsibility": "Water service and billing questions during office hours.",
+    "jurisdiction": "City",
+    "phone": "315-363-1490 ext. 155",
+    "email": "acampany@oneidacityny.gov",
+    "address": "109 N. Main Street, Oneida, NY 13421",
+    "hours": "Mon–Thu 8am–4pm; Fri 8am–3:30pm. Holiday exceptions apply.",
+    "website": "https://www.oneidacityny.gov/departments/water/index.php",
+    "source_ids": [
+      "water"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "This is an office contact, not a verified after-hours emergency number."
+  },
+  {
+    "id": "planning",
+    "organization": "Planning & Development",
+    "questions": [
+      "Who handles zoning?",
+      "development planning application"
+    ],
+    "responsibility": "Planning and development questions.",
+    "jurisdiction": "City",
+    "phone": "315-363-7467",
+    "email": "svonderweidt@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "codes",
+    "organization": "Code Enforcement",
+    "questions": [
+      "How do I report an unsafe building?",
+      "property maintenance housing complaint"
+    ],
+    "responsibility": "Code and property-maintenance questions.",
+    "jurisdiction": "City",
+    "phone": "315-363-8460 ext. 119",
+    "email": "jackerman@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "police",
+    "organization": "Police — non-emergency",
+    "questions": [
+      "How do I contact police?",
+      "non-emergency report"
+    ],
+    "responsibility": "Non-emergency police contact. For an emergency, call 911.",
+    "jurisdiction": "City",
+    "phone": "315-363-2323",
+    "email": null,
+    "address": "108 Main Street, Oneida, NY 13421",
+    "hours": "Mon–Thu 8am–4pm; Fri 8am–3:30pm. Holiday exceptions apply.",
+    "website": "https://www.oneidacityny.gov/departments/police/index.php",
+    "source_ids": [
+      "police"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "fire",
+    "organization": "Fire Department — office",
+    "questions": [
+      "Where do I ask about fire safety?"
+    ],
+    "responsibility": "Fire department office; emergencies go to 911.",
+    "jurisdiction": "City",
+    "phone": "315-363-1910 ext. 138",
+    "email": "firechief@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "parks",
+    "organization": "Parks & Recreation",
+    "questions": [
+      "How do I find recreation programs?",
+      "park pool recreation"
+    ],
+    "responsibility": "Recreation programs and parks questions.",
+    "jurisdiction": "City",
+    "phone": "315-363-3590",
+    "email": "lgriff@oneidacityny.gov",
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/staff_directory/index.php",
+    "source_ids": [
+      "staff"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": null
+  },
+  {
+    "id": "tax",
+    "organization": "City Chamberlain / taxes",
+    "questions": [
+      "Where do I pay city taxes?",
+      "tax water sewer parking payment"
+    ],
+    "responsibility": "City and county tax collection and municipal payments.",
+    "jurisdiction": "City",
+    "phone": null,
+    "email": "bparry@oneidacityny.gov",
+    "address": "109 N. Main Street, Oneida, NY 13421",
+    "hours": "Mon–Thu 8am–4pm; Fri 8am–3:30pm. Holiday exceptions apply. Closed noon–1pm.",
+    "website": "https://www.oneidacityny.gov/departments/comptroller/accounting_and_treasury.php",
+    "source_ids": [
+      "tax"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Official page lists conflicting telephone numbers (363-7599 and 363-7399). Email or check the office page; phone withheld pending reconciliation."
+  },
+  {
+    "id": "housing",
+    "organization": "Madison County Social Services",
+    "questions": [
+      "Who handles emergency housing?",
+      "homeless shelter Code Blue"
+    ],
+    "responsibility": "Emergency housing assistance and referrals.",
+    "jurisdiction": "County",
+    "phone": "315-366-2211",
+    "email": null,
+    "address": null,
+    "hours": "Mon–Fri 8am–4pm.",
+    "website": "https://www.madisoncounty.ny.gov/3251/Code-Blue-Information",
+    "source_ids": [
+      "housing"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Office-hours assistance; availability and eligibility require confirmation with DSS."
+  },
+  {
+    "id": "school",
+    "organization": "Oneida City School District",
+    "questions": [
+      "Who handles school questions?"
+    ],
+    "responsibility": "District information and school contacts.",
+    "jurisdiction": "School district",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacsd.org/",
+    "source_ids": [
+      "school"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Follow the official district website for current school-specific contacts."
+  },
+  {
+    "id": "library",
+    "organization": "Oneida Public Library",
+    "questions": [
+      "Where can I find library programs?",
+      "books library local history"
+    ],
+    "responsibility": "Library programs, information and community resources.",
+    "jurisdiction": "Community",
+    "phone": "315-363-3050",
+    "email": "abero@midyork.org",
+    "address": "459 Main Street, Oneida, NY 13421",
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/our_community/oneida_public_library.php",
+    "source_ids": [
+      "library"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "Check the official library site for current opening hours."
+  },
+  {
+    "id": "grid",
+    "organization": "National Grid — streetlight reporting",
+    "questions": [
+      "How do I report a streetlight outage?"
+    ],
+    "responsibility": "Use the streetlight-reporting link in the City website’s Resources menu.",
+    "jurisdiction": "Utility",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "hours": null,
+    "website": "https://www.oneidacityny.gov/",
+    "source_ids": [
+      "grid"
+    ],
+    "last_verified": "2026-09-12",
+    "emergency": false,
+    "notes": "For an immediate danger, call 911. This listing is for streetlight reports."
+  }
+]
