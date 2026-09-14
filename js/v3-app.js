@@ -1,10 +1,12 @@
+import {historyHTML} from './v4-content.js?v=4.1';
+import {loadLeaflet,createCommunityMap} from './community-map.js?v=4.2';
 import {loadCollections,eventState,stale,localDay} from './v3-core.js';
-import {homeHTML,projectsHTML,projectHTML,communityHTML,opportunityHTML,intro,e} from './v3-views.js';
+import {homeHTML,projectsHTML,projectHTML,communityHTML,opportunityHTML,intro,e} from './v3-views.js?v=4.1';
 import {moneyHTML,methodologyHTML} from './v3-money.js';
 import {contactsHTML,safetyHTML,archiveHTML,aboutHTML,downloadsHTML,correctionsHTML} from './v3-info.js';
 import {createAtlasMap} from './map.js';
 const main=document.querySelector('main'),announce=document.querySelector('#announcer');
-const names=['app_bundle','opportunities','money','directory','contact-checks','channels','sources','safety','safety-archive'];
+const names=['app_bundle','opportunities','money','directory','contact-checks','channels','sources','safety','safety-archive','media','venues','discovery'];
 const data=await loadCollections(names);
 // Shape failures are isolated just like network failures.
 for(const name of names){const valid=name==='app_bundle'?Array.isArray(data[name]?.projects):name==='money'?Array.isArray(data[name]?.years)&&Array.isArray(data[name]?.categories):Array.isArray(data[name]);if(!valid){data[name]=[];if(!data.errors.includes(name))data.errors.push(name);}}
@@ -18,8 +20,8 @@ function render(restore=true){
  const {view,id,params}=routeFrom(location.hash),projects=data.app_bundle?.projects||[];
  const aliases={explore:'projects',directory:'contacts',informed:'safety',meetings:'participate'};
  if(aliases[view]){location.replace('#'+aliases[view]);return;}
- const screens={home:()=>homeHTML(data),projects:()=>projectsHTML(data,params),project:()=>projectHTML(projects.find(p=>p.project_id===id)),money:()=>moneyHTML(data.money,params),community:()=>communityHTML(data,params),participate:()=>communityHTML(data,params,true),opportunity:()=>opportunityHTML(data.opportunities.find(r=>r.id===id),data),contacts:()=>contactsHTML(data,params),safety:()=>safetyHTML(data),archive:()=>archiveHTML(data),about:aboutHTML,methodology:()=>methodologyHTML(data.money),downloads:downloadsHTML,corrections:correctionsHTML};
- const labels={app_bundle:'Project records',opportunities:'Community and participation records',money:'Budget records',directory:'Contact guide','contact-checks':'Recent contact checks',channels:'Notification links',sources:'Source registry',safety:'Reviewed police records','safety-archive':'Police-publication index'};
+ const screens={history:()=>historyHTML(data),home:()=>homeHTML(data),projects:()=>projectsHTML(data,params),project:()=>projectHTML(projects.find(p=>p.project_id===id)),money:()=>moneyHTML(data.money,params),community:()=>communityHTML(data,params),participate:()=>communityHTML(data,params,true),opportunity:()=>opportunityHTML(data.opportunities.find(r=>r.id===id),data),contacts:()=>contactsHTML(data,params),safety:()=>safetyHTML(data),archive:()=>archiveHTML(data),about:aboutHTML,methodology:()=>methodologyHTML(data.money),downloads:downloadsHTML,corrections:correctionsHTML};
+ const labels={media:'Local photographs',venues:'Community venue locations',discovery:'Organizer discovery sources',app_bundle:'Project records',opportunities:'Community and participation records',money:'Budget records',directory:'Contact guide','contact-checks':'Recent contact checks',channels:'Notification links',sources:'Source registry',safety:'Reviewed police records','safety-archive':'Police-publication index'};
  const errors=data.errors.length?`<p class="error-note" role="status">Some information could not be loaded: ${data.errors.map(n=>labels[n]).join(', ')}. Other sections remain available. <button class="subtle" data-retry>Try loading again</button></p>`:'';
  try{main.innerHTML=errors+(screens[view]?screens[view]():intro('Page not found','Let’s get you back to Oneida.','That address does not match a page in this guide.')+'<a href="#home">Open the homepage →</a>');}catch(err){console.error('View unavailable',view,err);main.innerHTML=errors+intro('Page unavailable','This section could not be displayed.','Other sections remain available. Try another page or reload.')+'<button data-retry>Try again</button>';}
  const primary=view==='project'?'projects':view==='opportunity'?(data.opportunities.find(r=>r.id===id)?.type==='civic'?'participate':'community'):view;
@@ -27,6 +29,7 @@ function render(restore=true){
  const heading=main.querySelector('h1');document.title=(heading?.textContent||'Oneida')+' · Oneida Civic Atlas';
  const prior=restore?saved.get(location.hash||'#home'):null;
  if(prior){const candidates=[...main.querySelectorAll('a[href],button,input,select')];const el=candidates.find(x=>prior.id&&x.id===prior.id)||candidates.find(x=>prior.href&&x.getAttribute('href')===prior.href);(el||heading||main).focus({preventScroll:true});window.scrollTo(0,prior.scroll);}else{(heading||main).focus({preventScroll:true});window.scrollTo(0,0);}
+ if(view==='history'&&['people','city','community','industry'].includes(id)){const section=document.getElementById('history-'+id);const h=section?.querySelector('h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});section.scrollIntoView();}}
  announce.textContent=heading?.textContent||'Page loaded';currentRoute=location.hash;
 }
 document.addEventListener('click',event=>{
@@ -37,6 +40,7 @@ document.addEventListener('click',event=>{
  if(b.hasAttribute('data-copy')){navigator.clipboard?.writeText(location.href).then(()=>{announce.textContent='Shareable link copied.';b.textContent='Link copied';}).catch(()=>{announce.textContent='Copy is unavailable; copy the address from your browser.';b.textContent='Copy the browser address';});if(!navigator.clipboard){b.textContent='Copy the browser address';announce.textContent='Copy the current address from your browser.';}}
  if(b.hasAttribute('data-download-money'))downloadMoney();
  if(b.id==='load-map')loadMap(b);
+ if(b.id==='load-community-map')loadCommunityMap(b);
  if(b.id==='center-map'){if(!navigator.geolocation){announce.textContent='Location is unavailable in this browser.';return;}navigator.geolocation.getCurrentPosition(p=>{map?.raw.setView([p.coords.latitude,p.coords.longitude],15);announce.textContent='Map centered on your location. This does not filter nearby projects.';},()=>{document.querySelector('#map-status').textContent='Location is unavailable or permission was declined. You can still browse the map and the complete project list.';},{timeout:10000,maximumAge:60000});}
 });
 document.addEventListener('submit',event=>{
@@ -50,12 +54,24 @@ async function loadMap(button){
  const generation=mapGeneration;button.disabled=true;button.textContent='Loading map…';const target=document.querySelector('#map-content');
  try{
   const response=await fetch('./data/map_features.geojson',{signal:AbortSignal.timeout(10000)});if(!response.ok)throw new Error('Map data unavailable');const geo=await response.json();if(!Array.isArray(geo.features))throw new Error('Map features unavailable');
-  if(!window.L){await new Promise((resolve,reject)=>{const css=document.createElement('link');css.rel='stylesheet';css.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';css.integrity='sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';css.crossOrigin='';document.head.append(css);const script=document.createElement('script');script.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';script.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';script.crossOrigin='';script.onload=resolve;script.onerror=reject;document.head.append(script);});}
+  await loadLeaflet();
   if(generation!==mapGeneration)return;
   target.innerHTML='<div id="atlas-map" aria-label="Limited project map"></div><p id="map-status" class="fine" role="status">Mapped points do not show a complete inventory or ward boundaries.</p><button id="center-map" class="subtle">Center map on my location</button>';
   map=createAtlasMap('atlas-map',id=>{snapshot();location.hash='#project/'+id;});map.setFeatures(geo.features);map.fitVerified();map.raw.eachLayer(layer=>layer.on?.('tileerror',()=>{const status=document.querySelector('#map-status');if(status)status.textContent='Some map tiles are unavailable. The complete project list remains usable.';}));button.hidden=true;
  }catch{if(generation!==mapGeneration)return;target.innerHTML='<p class="empty" role="status">The map could not load. All project records remain available in the list below.</p>';button.disabled=false;button.textContent='Try loading the map again';}
 }
+async function loadCommunityMap(button){
+ const generation=mapGeneration,target=document.querySelector('#community-map-content');button.disabled=true;button.textContent='Loading map…';
+ try{
+  const ids=JSON.parse(button.dataset.records),rows=data.opportunities.filter(r=>ids.includes(r.id));
+  await loadLeaflet();if(generation!==mapGeneration)return;
+  map=createCommunityMap(target,rows,data.venues);button.hidden=true;
+  document.querySelector('.community-map')?.addEventListener('toggle',event=>{if(event.target.open)map?.raw.invalidateSize();});
+ }catch{if(generation!==mapGeneration)return;map?.raw.remove();map=null;target.innerHTML='<p class="empty" role="status">The map could not load. All matching activities and organizer links remain available below.</p>';button.disabled=false;button.textContent='Try loading the community map again';}
+}
+document.addEventListener('error',event=>{
+ const img=event.target;if(img.tagName==='IMG'&&img.closest('.local-photo')){if(img.dataset.fallbackSrc){const src=img.dataset.fallbackSrc;delete img.dataset.fallbackSrc;img.removeAttribute('srcset');img.src=src;return;}img.hidden=true;const note=document.createElement('p');note.className='fine';note.textContent='Photo unavailable. The original and credit are linked below.';img.after(note);}
+},true);
 window.addEventListener('hashchange',()=>render());
 window.addEventListener('beforeprint',()=>{printingDetails=[...document.querySelectorAll('details')].map(d=>[d,d.open]);printingDetails.forEach(([d])=>d.open=true);});
 window.addEventListener('afterprint',()=>printingDetails.forEach(([d,open])=>d.open=open));

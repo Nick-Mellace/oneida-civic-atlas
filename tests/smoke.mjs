@@ -30,6 +30,8 @@ test('HTML uses the V3 entry point and map dependency loads only on request', as
   assert.doesNotMatch(html, /<script[^>]+leaflet/);
   assert.match(html, /id="content"/);
   const app = await fs.readFile(new URL('../js/v3-app.js', import.meta.url), 'utf8');
-  assert.match(app, /leaflet@1\.9\.4/);
+  const mapLoader = await fs.readFile(new URL('../js/community-map.js', import.meta.url), 'utf8');
+  assert.match(mapLoader, /leaflet@1\.9\.4/);
+  assert.match(app, /await loadLeaflet/);
   assert.match(app, /async function loadMap/);
 });

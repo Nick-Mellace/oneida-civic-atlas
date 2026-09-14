@@ -1,0 +1,16 @@
+[
+  {
+    "id": "mansion-house",
+    "name": "Oneida Community Mansion House",
+    "address": "170 Kenwood Avenue, Oneida, NY 13421",
+    "latitude": 43.06034,
+    "longitude": -75.60462,
+    "geographic_scope": "City of Oneida",
+    "coordinate_source": "https://mapcarta.com/N3834779623",
+    "coordinate_source_title": "Mapcarta / OpenStreetMap museum node 3834779623",
+    "accuracy": "Approximate museum point, not a surveyed entrance, parking location or event boundary.",
+    "address_source": "https://www.oneidacommunity.org/event-details/tunnels-towers-tour-8",
+    "last_checked": "2026-09-14",
+    "verified": true
+  }
+]

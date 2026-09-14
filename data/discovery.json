@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Oneida Community Mansion House",
+    "city_source": "https://www.oneidacityny.gov/our_community/community_links.php",
+    "website": "https://www.oneidacommunity.org/",
+    "events_url": "https://www.oneidacommunity.org/event",
+    "social_url": null,
+    "status": "September 17 tour and volunteer route verified. Check organizer for changes.",
+    "gap": "Other events require individual review; no automated social feed.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "Madison County Historical Society",
+    "city_source": "https://www.oneidacityny.gov/our_community/community_links.php",
+    "website": "https://mchs1900.org/",
+    "events_url": "https://mchs1900.org/events/",
+    "social_url": null,
+    "status": "Festival ended September 13; volunteer inquiry remains available.",
+    "gap": "Venue coordinates and additional future programs need review.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "Oneida Public Library",
+    "city_source": "https://www.oneidacityny.gov/our_community/oneida_public_library.php",
+    "website": "https://oneidapubliclibrary.org/",
+    "events_url": "https://oneidapubliclibrary.org/",
+    "social_url": "https://www.facebook.com/OneidaPublicLibrary",
+    "status": "Official library website checked; use its current program listings.",
+    "gap": "Official Facebook account confirmed by City referral, but posts could not be retrieved. Future events and art-image rights need individual verification.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "Gorman Foundation Community Center",
+    "city_source": "https://www.oneidacityny.gov/our_community/community_links.php",
+    "website": "https://gormanfcc.com/",
+    "events_url": null,
+    "social_url": null,
+    "status": "Center website and tenant links checked.",
+    "gap": "No dated upcoming public gathering verified; ask the relevant tenant.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "Pexton Memorials",
+    "city_source": "https://www.oneidacityny.gov/our_community/community_links.php",
+    "website": "https://www.pextonmemorials.net/",
+    "events_url": null,
+    "social_url": null,
+    "status": "City-linked business checked; listed address is in nearby Canastota.",
+    "gap": "No current public event found on reviewed pages; no reuse permission for website photos.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "The Blind Squirrel Pub",
+    "city_source": null,
+    "website": "https://thebspub.com/",
+    "events_url": "https://thebspub.com/events/",
+    "social_url": null,
+    "status": "Supplementary local venue. Official events page returned no upcoming listings.",
+    "gap": "City backlink and official social account not verified. Older karaoke/open-mic listings do not establish a 2026 schedule.",
+    "last_checked": "2026-09-14"
+  },
+  {
+    "name": "Greater Oneida Chamber of Commerce",
+    "city_source": "https://www.oneidacityny.gov/our_community/community_links.php",
+    "website": "https://greateroneidachamber.org/",
+    "events_url": null,
+    "social_url": null,
+    "status": "Discovery lead from the City directory.",
+    "gap": "Member-by-member and social-account review remains incomplete; not counted as a reviewed business website.",
+    "last_checked": "2026-09-14"
+  }
+]

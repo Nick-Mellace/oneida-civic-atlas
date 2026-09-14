@@ -1,0 +1,38 @@
+[
+  {
+    "id": "mansion",
+    "title": "Oneida Community Mansion House",
+    "creator": "Oneidacommunitymansionhouse",
+    "original_url": "https://commons.wikimedia.org/wiki/File:Oneida_Community_Mansion_House_2021.jpg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Oneida_Community_Mansion_House_2021.jpg",
+    "thumbnail_base": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Oneida_Community_Mansion_House_2021.jpg/",
+    "filename": "Oneida_Community_Mansion_House_2021.jpg",
+    "width": 2097,
+    "height": 1400,
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "restrictions": "Credit creator and license; indicate changes; adaptations must retain the same license. No endorsement implied.",
+    "changes": "Browser-resized, uncropped.",
+    "taken": "2020-05-30",
+    "last_checked": "2026-09-14",
+    "alt": "Brick towers, broad lawn and mature trees at the Oneida Community Mansion House."
+  },
+  {
+    "id": "hall",
+    "title": "Inside the Mansion House",
+    "creator": "Cathbart1948",
+    "original_url": "https://commons.wikimedia.org/wiki/File:Oneida_Community_Family_Hall.jpg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Oneida_Community_Family_Hall.jpg",
+    "thumbnail_base": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Oneida_Community_Family_Hall.jpg/",
+    "filename": "Oneida_Community_Family_Hall.jpg",
+    "width": 4608,
+    "height": 3456,
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "restrictions": "Credit creator and license; indicate changes; adaptations must retain the same license. No endorsement implied.",
+    "changes": "Browser-resized, uncropped.",
+    "taken": "2016-04-02",
+    "last_checked": "2026-09-14",
+    "alt": "A spacious historic meeting room with rows of chairs and a gallery at the Mansion House."
+  }
+]
