@@ -1,0 +1,16 @@
+node_modules/
+.git/
+.github/
+.wrangler/
+.dev.vars*
+.env*
+tests/
+scripts/
+package.json
+package-lock.json
+wrangler.jsonc
+.gitignore
+.assetsignore
+.DS_Store
+**/__pycache__/
+**/*.pyc
